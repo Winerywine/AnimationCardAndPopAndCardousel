@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @interface JGPeaViewController : UIViewController
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @end

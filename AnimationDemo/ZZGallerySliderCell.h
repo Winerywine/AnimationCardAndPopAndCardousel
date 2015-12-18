@@ -2,8 +2,8 @@
 //  Cell.h
 //  newCollectionView
 //
-//  Created by chester on 14-2-20.
-//  Copyright (c) 2014年 chester. All rights reserved.
+//  Created by b5m on 15-12-16.
+//  Copyright (c) 2015年 b5m. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,14 +15,12 @@
 -(void)switchNavigator:(NSUInteger)tag;
 
 @end
-
 @interface ZZGallerySliderCell : UICollectionViewCell
-
-
 @property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UIView *maskView;
 @property(nonatomic, strong) UILabel *title;
-@property(nonatomic, strong) UILabel *desc;
+@property(nonatomic, strong) UIView *desc;
+@property (nonatomic,strong) UILabel *titleLabel;
 
 -(void)setNameLabel:(NSString *)string;
 -(void)setDescLabel:(NSString *)string;

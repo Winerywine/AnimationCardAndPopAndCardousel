@@ -2,8 +2,8 @@
 //  customLayout.h
 //  newCollectionView
 //
-//  Created by chester on 14-2-20.
-//  Copyright (c) 2014年 chester. All rights reserved.
+//  Created by b5m on 15-12-16.
+//  Copyright (c) 2015年 b5m. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

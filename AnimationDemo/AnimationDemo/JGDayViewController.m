@@ -20,7 +20,7 @@
     [super viewDidLoad];
     self.title = @"每日好店";
     self.view.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.9];
-    self.rowArray = [NSMutableArray arrayWithObjects:@"111",@"222",@"333",@"444",@"555",@"666", nil];
+    self.rowArray = [NSMutableArray arrayWithObjects:@"111",@"222",@"333",@"444",@"555",@"7.jpg", nil];
     
     [self.cardView registerNib:[UINib nibWithNibName:@"MyCard" bundle:nil] forItemReuseIdentifier:@"B"];
     self.cardView.delegate = self;

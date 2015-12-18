@@ -2,13 +2,13 @@
 //  Cell.m
 //  newCollectionView
 //
-//  Created by chester on 14-2-20.
-//  Copyright (c) 2014年 chester. All rights reserved.
+//  Created by chester on 15-12-16.
+//  Copyright (c) 2015年 b5m. All rights reserved.
 //
 
 #import "ZZGallerySliderCell.h"
 #import "macro.h"
-
+#define KSCREENWIDTH [UIScreen mainScreen].bounds.size.width
 @interface ZZGallerySliderCell()
 {
     BOOL hasLayout;
@@ -39,7 +39,7 @@
         self.maskView.alpha = 0.6;
         [self addSubview:self.maskView];
         
-        self.title = [[UILabel alloc] initWithFrame:CGRectMake(0, (CELL_HEIGHT-TITLE_HEIGHT)/2, CELL_WIDTH, TITLE_HEIGHT)];
+        self.title = [[UILabel alloc] initWithFrame:CGRectMake(0, (CELL_HEIGHT-TITLE_HEIGHT)/2 + 80, CELL_WIDTH, TITLE_HEIGHT)];
         self.title.textColor = [UIColor whiteColor];
         self.title.font = [UIFont systemFontOfSize:30];
         self.title.textAlignment = NSTextAlignmentCenter;
@@ -50,19 +50,37 @@
         [self.title setBackgroundColor:[UIColor clearColor]];
         
 //        self.desc = [[UILabel alloc] initWithFrame:CGRectMake(0, (CELL_HEIGHT-TITLE_HEIGHT)/2+30, 300 , 0)];
-        
-        self.desc = [[UILabel alloc]initWithFrame:CGRectMake(-70, self.desc.frame.origin.y + 50, 300, 30)];
-        NSLog(@"title is %@, desc is %@",NSStringFromCGRect(self.title.frame),NSStringFromCGRect(self.desc.frame));
-        self.desc.textColor = [UIColor whiteColor];
-        self.desc.font = [UIFont systemFontOfSize:14];
-        self.desc.alpha = 0;
-        self.desc.textAlignment = NSTextAlignmentCenter;
-        self.desc.backgroundColor = [UIColor clearColor];
-        // 描述信息
-        self.desc.frame = CGRectMake(-70, self.desc.frame.origin.y + 50, 300, 30);
+        self.desc = [[UIView alloc]initWithFrame:CGRectMake(0, 130, KSCREENWIDTH , 60 + 50)];
+//        self.desc.backgroundColor = [UIColor cyanColor];
+        // 标题label
+        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, -35, KSCREENWIDTH, 50)];
+        self.titleLabel.text = [NSString stringWithFormat:@"健康牙齿第一步"];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.font = [UIFont systemFontOfSize:30.0];
+        [self.desc addSubview:self.titleLabel];
+        // 添加ImageView
+        UIImageView *userImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 65, 40, 40)];
+        userImgView.image = [UIImage imageNamed:@"head.jpg"];
+        userImgView.clipsToBounds = YES;
+        userImgView.layer.cornerRadius = 20;
+        [self.desc addSubview:userImgView];
+        // 添加UserName
+        UILabel *userLabel = [[UILabel alloc]initWithFrame:CGRectMake(65, 110 - 40, 80, 40)];
+        userLabel.text = @"Alice";
+        userLabel.textColor = [UIColor whiteColor];
+        [self.desc addSubview:userLabel];
+        // likeLabel
+        UILabel *LikeLabel = [[UILabel alloc]initWithFrame:CGRectMake(KSCREENWIDTH - 60, 110 - 40, 80, 40)];
+        LikeLabel.text = [NSString stringWithFormat:@"%d",1895];
+        [self.desc addSubview:LikeLabel];
+        // likeImgView
+        UIImageView *likeImgView = [[UIImageView alloc]initWithFrame:CGRectMake(KSCREENWIDTH - 100, 115 - 40, 30, 30)];
+        likeImgView.image = [UIImage imageNamed:@"see.png"];
+        [self.desc addSubview:likeImgView];
         [self addSubview:self.desc];
-        
-    }
+        [self addSubview:self.desc];
+        }
     return self;
 }
 /**
@@ -71,10 +89,14 @@
 -(void)revisePositionAtFirstCell
 {
     if(self.tag == 1){
-        self.desc.frame = CGRectMake(-70, self.desc.frame.origin.y + 50, 300, 30);
         self.title.layer.transform = CATransform3DMakeScale(1, 1, 1);
         self.desc.alpha = 0.85;
-        self.title.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.contentView.center.y);
+        self.title.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.contentView.center.y + 70);
+//        self.title.center = self.contentView.center;
+        self.titleLabel.text = @"";
+    }else
+    {
+        self.titleLabel.text = @"健康牙齿第一步";
     }
 }
 /**
@@ -84,6 +106,7 @@
  */
 -(void)setIndex:(NSUInteger)index
 {
+    
     self.cellIndex = index;
     if (self.cellIndex == 0) {
         self.maskView.alpha = 0;
@@ -118,9 +141,7 @@
     if(string == nil || [string isEqualToString:@""]){
         return;
     }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:string];
-    self.desc.attributedText = str;
-    self.desc.frame = CGRectMake(-70, self.desc.frame.origin.y + 50, 300, 30);
+    
 }
 
 /**
@@ -129,8 +150,8 @@
 -(void)reset
 {
     self.imageView.image = nil;
-    self.title.text = @"";
-    self.desc.text = @"";
+//    self.title.text = @"";
+//    self.desc.text = @"";
 }
 
 -(void)dealloc

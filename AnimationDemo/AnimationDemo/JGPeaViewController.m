@@ -56,7 +56,7 @@
 {
     ZZGallerySliderLayout *layout = [[ZZGallerySliderLayout alloc] init];
     [layout setContentSize:20];
-    galleryCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, CELL_WIDTH, (CGRectGetHeight([UIScreen mainScreen].bounds ) + 50)) collectionViewLayout:layout];
+    galleryCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, CELL_WIDTH, (CGRectGetHeight([UIScreen mainScreen].bounds) )) collectionViewLayout:layout];
     [galleryCollectionView registerClass:[ZZGallerySliderCell class] forCellWithReuseIdentifier:@"CELL"];
     galleryCollectionView.dataSource = self;
     galleryCollectionView.delegate = self;
@@ -101,13 +101,14 @@
     
     if(indexPath.row == 0){
         cell.imageView.image = nil;
+        
     }else{
         if(indexPath.row == 1){
             [cell revisePositionAtFirstCell];
         }
         
         [cell setNameLabel:@"健康牙齿第一步"];
-        [cell setDescLabel:@"Jun.K"];
+//        [cell setDescLabel:@"Jun.K"];
         
         UIImage *image = [UIImage imageNamed:[_dataArray objectAtIndex:indexPath.row-1]];
         cell.imageView.image = image;
@@ -120,6 +121,10 @@
     NSLog(@"点击了单元格");
     [self present];
 }
+
+/**
+ *  模态到宝贝详情界面
+ */
 - (void)present{
     XWPresentedOneController *presentedVC = [XWPresentedOneController new];
     presentedVC.delegate = self;
@@ -133,9 +138,10 @@
 - (id<UIViewControllerInteractiveTransitioning>)interactiveTransitionForPresent{
     return _interactivePush;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 

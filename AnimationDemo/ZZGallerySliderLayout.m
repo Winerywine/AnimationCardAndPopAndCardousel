@@ -2,8 +2,8 @@
 //  customLayout.m
 //  newCollectionView
 //
-//  Created by chester on 14-2-20.
-//  Copyright (c) 2014年 chester. All rights reserved.
+//  Created by b5m on 15-12-16.
+//  Copyright (c) 2015年 b5m. All rights reserved.
 //
 
 #import "ZZGallerySliderLayout.h"
@@ -11,10 +11,6 @@
 #import "macro.h"
 
 @interface ZZGallerySliderLayout()
-{
-    
-}
-
 @property(nonatomic, assign) NSUInteger count;
 @end
 
@@ -24,7 +20,7 @@
 {
     self = [super init];
     if (self) {
-        self.itemSize = CGSizeMake(320, CELL_HEIGHT);
+        self.itemSize = CGSizeMake(320, CELL_HEIGHT - 100);
         self.scrollDirection = UICollectionViewScrollDirectionVertical;// 竖直滑动
         self.minimumInteritemSpacing = 0;
         self.minimumLineSpacing = 0;
@@ -118,9 +114,7 @@
             
         }
     }
-    
     if ([self.delegate respondsToSelector:@selector(setEffectOfHead:)]) [self.delegate setEffectOfHead:screen_y];
-    
     return array;
 }
 
@@ -141,20 +135,9 @@
 {
     ZZGallerySliderCell *cell = (ZZGallerySliderCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     cell.maskView.alpha = MAX((1-percent)*0.6, 0.2);
-//    cell.desc.frame = CGRectMake(10, 85+percent*60, cell.desc.frame.size.width, cell.desc.frame.size.height);
-    cell.desc.frame = CGRectMake(-70, 200, 300, 30);
     cell.desc.alpha = percent*0.85;
-    
-    
-    NSLog(@"-------%@",NSStringFromCGRect(cell.title.frame));
-    CGRect rect = cell.title.frame;
-    if (rect.origin.x == 0) {
-        
-        NSLog(@"aaaa");
-    }
-    
-//    cell.title.layer.transform = CATransform3DMakeScale(0.5+0.5*percent, 0.5+0.5*percent, 1);
-//    cell.title.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, CELL_HEIGHT/2+(CELL_CURRHEIGHT-CELL_HEIGHT)/2*percent);
+    cell.title.layer.transform = CATransform3DMakeScale(0.5+0.5*percent, 0.5+0.5*percent, 1);
+    cell.title.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, CELL_HEIGHT/2+(CELL_CURRHEIGHT-CELL_HEIGHT)/2*percent);
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
