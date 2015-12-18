@@ -1,0 +1,21 @@
+//
+//  ForPch.pch
+//  AnimationDemo
+//
+//  Created by jgCho on 15/12/10.
+//  Copyright © 2015年 com.b5m. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#define KWIDTH  [UIScreen mainScreen].bounds.size.width
+#define KHEIGHT [UIScreen mainScreen].bounds.size.height
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
